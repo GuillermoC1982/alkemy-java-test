@@ -23,7 +23,6 @@ public class Subject {
 
     public Subject() {
 
-
     }
 
     public Subject(String name, LocalTime time,Teacher teacher, Integer availability) {
