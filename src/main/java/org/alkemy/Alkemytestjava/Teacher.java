@@ -1,10 +1,9 @@
 package org.alkemy.Alkemytestjava;
 
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Teacher {
@@ -18,6 +17,9 @@ public class Teacher {
     private String  last_name;
     private int dni;
     private boolean active;
+
+    @OneToMany(mappedBy="teacher", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Subject> subjects;
 
     public Teacher() {
     }

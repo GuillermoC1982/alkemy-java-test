@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class Subject {
@@ -20,6 +21,9 @@ public class Subject {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="teacher_id")
     private Teacher teacher;
+
+    @OneToMany(mappedBy="subject", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Subscription> subscriptions;
 
     public Subject() {
 

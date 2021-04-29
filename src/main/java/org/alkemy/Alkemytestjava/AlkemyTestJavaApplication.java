@@ -17,7 +17,8 @@ public class AlkemyTestJavaApplication {
 
 	@Bean
 	public CommandLineRunner initData(TeachersRepository teachersRepository,
-									  SubjetsRepository subjetsRepository){
+									  SubjetsRepository subjetsRepository,
+									  UserRepository userRepository){
 		return (args) -> {
 
 			//Teacher parameters constructor: (String name, String last_name, int dni, boolean active)
@@ -31,6 +32,11 @@ public class AlkemyTestJavaApplication {
 			Subject subject1 = subjetsRepository.save(new Subject("Quantum_Physics", LocalTime.of(9,30), teacher1, 3));
 			Subject subject2 = subjetsRepository.save(new Subject("Alchemy", LocalTime.of(11,30), teacher2,4));
 			Subject subject3 = subjetsRepository.save(new Subject("Dark_Arts", LocalTime.of(17,30), teacher3,2));
+
+			//User parameters constructor:(int dni, Integer file, String role)
+
+			User user1 = userRepository.save(new User(29995559, 220, "student"));
+			User user2 = userRepository.save(new User(24545766, 221, "student"));
 		};
 	}
 }
