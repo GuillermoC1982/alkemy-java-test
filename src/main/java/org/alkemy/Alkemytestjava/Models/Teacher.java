@@ -1,9 +1,12 @@
-package org.alkemy.Alkemytestjava;
+package org.alkemy.Alkemytestjava.Models;
 
+import org.alkemy.Alkemytestjava.Models.Subject;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Teacher {
@@ -66,4 +69,5 @@ public class Teacher {
     public void setActive(boolean active) {
         this.active = active;
     }
+
 }

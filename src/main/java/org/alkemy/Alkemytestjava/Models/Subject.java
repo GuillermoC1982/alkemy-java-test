@@ -1,10 +1,14 @@
-package org.alkemy.Alkemytestjava;
+package org.alkemy.Alkemytestjava.Models;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
 public class Subject {
@@ -15,6 +19,7 @@ public class Subject {
     private Long id;
 
     private String name;
+    private String description;
     private LocalTime time;
     private Integer availability;
 
@@ -29,8 +34,9 @@ public class Subject {
 
     }
 
-    public Subject(String name, LocalTime time,Teacher teacher, Integer availability) {
+    public Subject(String name, String description, LocalTime time, Teacher teacher, Integer availability) {
         this.name = name;
+        this.description = description;
         this.time = time;
         this.availability = availability;
         this.teacher = teacher;
@@ -42,6 +48,16 @@ public class Subject {
 
     public String getName() {
         return name;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public LocalTime getTime() {
@@ -56,6 +72,10 @@ public class Subject {
         this.name = name;
     }
 
+    public void setDescription(String description) {
+        this.name = description;
+    }
+
     public void setTime(LocalTime time) {
         this.time = time;
     }
@@ -63,4 +83,5 @@ public class Subject {
     public void setAvailability(Integer availability) {
         this.availability = availability;
     }
+
 }

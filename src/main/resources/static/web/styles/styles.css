@@ -1,0 +1,27 @@
+#Categories{
+    height: 20rem;
+}
+
+.carousel {
+    height: 22rem;
+}
+.carousel-item
+{
+}
+
+
+.carousel-item.i3
+{
+    bottom: 73px;
+    position: relative;
+}
+.carousel-item.i2
+{
+    bottom: 10px;
+    position: relative;
+}
+.carousel-item.i1
+{
+    bottom: 143px;
+    position: relative;
+}
