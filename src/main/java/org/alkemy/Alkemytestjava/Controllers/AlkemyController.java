@@ -44,7 +44,7 @@ public class AlkemyController {
         dto.put("teachers", teachersRepository
                 .findAll()
                 .stream()
-                .map(item -> DtoMaker.GetFromEntity(item))
+                .map(DtoMaker::GetFromEntity)
                 .collect(toList()));
 
         dto.put("subjects", subjectsRepository

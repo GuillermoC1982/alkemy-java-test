@@ -43,15 +43,17 @@ public class AlkemyTestJavaApplication {
 
 			//Subject parameters constructor: (String name, LocalTime time, Integer availability)
 
-			Subject subject1 = subjetsRepository.save(new Subject("Quantum_Physics", "", LocalTime.of(9,30), teacher1, 3));
-			Subject subject2 = subjetsRepository.save(new Subject("Alchemy", "",LocalTime.of(11,30), teacher2,4));
-			Subject subject3 = subjetsRepository.save(new Subject("Dark_Arts", "",LocalTime.of(17,30), teacher3,2));
+			Subject subject1 = subjetsRepository.save(new Subject("Quantum_Physics", LocalTime.of(9,30), teacher1, 3));
+			Subject subject2 = subjetsRepository.save(new Subject("Alchemy", LocalTime.of(11,30), teacher2,4));
+			Subject subject3 = subjetsRepository.save(new Subject("Dark_Arts", LocalTime.of(17,30), teacher3,2));
 
 			//User parameters constructor:(int dni, Integer file, String role)
 
-			User user1 = userRepository.save(new User("29591307", passwordEncoder.encode ("220"), "student"));
+			User user1 = userRepository.save(new User("28313880", passwordEncoder.encode ("123"), "student"));
 			User user2 = userRepository.save(new User("24545766", passwordEncoder.encode ("221"), "student"));
-			Subscription sus11 = subscriptionRepository.save(new Subscription(subject1, user1));
+
+			Subscription sus1 = subscriptionRepository.save(new Subscription(subject1, user1));
+			Subscription sus2 = subscriptionRepository.save(new Subscription(subject2, user1));
 		};
 	}
 }

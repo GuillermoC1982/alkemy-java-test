@@ -19,7 +19,6 @@ public class Subject {
     private Long id;
 
     private String name;
-    private String description;
     private LocalTime time;
     private Integer availability;
 
@@ -34,9 +33,8 @@ public class Subject {
 
     }
 
-    public Subject(String name, String description, LocalTime time, Teacher teacher, Integer availability) {
+    public Subject(String name, LocalTime time, Teacher teacher, Integer availability) {
         this.name = name;
-        this.description = description;
         this.time = time;
         this.availability = availability;
         this.teacher = teacher;
@@ -49,13 +47,12 @@ public class Subject {
     public String getName() {
         return name;
     }
-    public String getDescription() {
-        return description;
-    }
+
 
     public Teacher getTeacher() {
         return teacher;
     }
+
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
@@ -72,9 +69,6 @@ public class Subject {
         this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.name = description;
-    }
 
     public void setTime(LocalTime time) {
         this.time = time;

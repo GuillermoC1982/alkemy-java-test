@@ -22,6 +22,20 @@ var mainVue = new Vue({
         },
         reload_url : function (url){
             location.href = url;
+        },
+        openTeacherControlModal : function (teacher){
+
+            $('#txtTeacherDNI').val(teacher ? teacher.dni : '');
+            $('#txtTeacherName').val(teacher ? teacher.name : '');
+            $('#txtTeacherLastName').val(teacher ? teacher.last_name : '');
+            $('#hidIdTeacher').val(teacher ? teacher.id : 0);
+            $('#teacherControlModal').modal('show');
+
+        },
+        deleteTeacher : function (teacher){
+
+                alert('Confirma borrar teacher' + teacher.dni + '?');
+              //teacherControlModal
         }
     }
 });
