@@ -46,10 +46,13 @@ public class AlkemyTestJavaApplication {
 			Subject subject1 = subjetsRepository.save(new Subject("Quantum_Physics", LocalTime.of(9,30), teacher1, 3));
 			Subject subject2 = subjetsRepository.save(new Subject("Alchemy", LocalTime.of(11,30), teacher2,4));
 			Subject subject3 = subjetsRepository.save(new Subject("Dark_Arts", LocalTime.of(17,30), teacher3,2));
+			Subject subject4 = subjetsRepository.save(new Subject("Mathematics", LocalTime.of(17,30), teacher3,1));
+			Subject subject5 = subjetsRepository.save(new Subject("Spanish", LocalTime.of(17,30), teacher1,1));
+			Subject subject6 = subjetsRepository.save(new Subject("Javascript", LocalTime.of(17,40), teacher1,0));
 
 			//User parameters constructor:(int dni, Integer file, String role)
 
-			User user1 = userRepository.save(new User("666", passwordEncoder.encode ("666"), "student"));
+			User user1 = userRepository.save(new User("111", passwordEncoder.encode ("111"), "student"));
 			User user2 = userRepository.save(new User("24545766", passwordEncoder.encode ("221"), "student"));
 			User user3 = userRepository.save(new User("28313880", passwordEncoder.encode ("123"), "admin"));
 

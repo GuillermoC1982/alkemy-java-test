@@ -22,9 +22,6 @@ var mainVue = new Vue({
             $.post("/api/logout").done(function() {location.reload()})
         },
 
-        reload_url : function (url){
-            location.href = url;
-        },
         openTeacherControlModal : function (teacher){
 
             $('#txtTeacherDNI').val(teacher ? teacher.dni : '');
@@ -184,24 +181,31 @@ var mainVue = new Vue({
             });
         },
 
+
+
         subscribe: function(idSubject, isSubscribing)
         {
             $.post({
-                url: "/api/subjects/subscribe/" + (isSubscribing ? 1 : -1) * idSubject,
+                url: "/api/subsciptions/subscribe/" + (isSubscribing ? 1 : -1) * idSubject,
                 dataType: "text",
                 contentType: "application/json"
             })
             .done(function (response) {
 
-                let oNewEntity = JSON.parse(response).entityDTO;
+                location.reload();
+                /*let oNewEntity = JSON.parse(response).entityDTO;
                 if(isSubscribing)
                     mainVue.user.subscriptions.push(oNewEntity);
-                else
-                {
-                    let index = mainVue.user.subscriptions.findIndex(x => x.subject.id == idSubject)
-                    if(index >= 0)
-                        mainVue.user.subscriptions.splice(index, 1);
-                }
+                else {
+                    if(oNewEntity) {
+                        let index = mainVue.user.subscriptions.findIndex(x => x.subject.id == idSubject)
+                        if(index >= 0)
+                            mainVue.user.subscriptions.splice(index, 1);
+                    }
+                    else{
+                        alert('Error');
+                    }
+                }*/
             })
             .fail(function (error) {
                 alert("Error: " + JSON.parse(error.responseText).error);
@@ -212,6 +216,8 @@ var mainVue = new Vue({
     }
 });
 
+// Initialize InputMask
+$('input').inputmask();
 
 fetch('/api/getInfo')
 .then(function(response){

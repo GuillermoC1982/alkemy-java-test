@@ -85,43 +85,5 @@ public class SubjectsController {
 
         return ResponseEntity.ok().body(subject);
     }
-
-
-    @PostMapping("/subscribe/{idSubject}")
-    public ResponseEntity<Map<String, Object>> suscribe(Authentication authentication, @PathVariable("idSubject") Long idSubject){
-
-        ResponseEntity<Map<String, Object>> response;
-        User oUser = userRepository.findByDni(authentication.getName());
-        String sRole = oUser.getRole();
-        if(!AlkemyController.isUserAuthenticated(authentication)){
-            response = new ResponseEntity<>(AlkemyController.makeMap("error", "Must Login"), HttpStatus.FORBIDDEN);
-        } else if(sRole.toUpperCase().equals("STUDENT")) {
-
-            Subject oSubject = subjectsRepository.findById(Math.abs(idSubject)).get();
-
-            if(idSubject>0) {
-                try {
-                    List<Subscription> oSameTimeSubscriptions = oUser.getSubscriptions().stream().filter(ss -> ss.getSubject().getTime() == oSubject.getTime()).collect(toList());
-                    if (oSameTimeSubscriptions.size() > 0)
-                        response = new ResponseEntity<>(AlkemyController.makeMap("error", "Time overlapped with another Subject"), HttpStatus.FORBIDDEN);
-                    else
-                        response = new ResponseEntity<>(AlkemyController.makeMap("entityDTO", DtoMaker.GetFromEntity(subscriptionRepository.save(new Subscription(oSubject, oUser)))), HttpStatus.CREATED);
-                }
-                catch (Exception ex) {
-                    //System.out.println(ex.getMessage());
-                    response = new ResponseEntity<>(AlkemyController.makeMap("error", ex.getMessage()), HttpStatus.FORBIDDEN);
-                }
-            }
-            else
-            {
-                subscriptionRepository.delete(new Subscription(oSubject, oUser));
-                response = new ResponseEntity<>(AlkemyController.makeMap("entityDTO", new Object()), HttpStatus.CREATED);
-            }
-        }
-        else
-            response = new ResponseEntity<>(AlkemyController.makeMap("error", "Must be an Student"), HttpStatus.FORBIDDEN);
-
-        return response;
-    }
 }
 
