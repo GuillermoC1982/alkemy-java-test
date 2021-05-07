@@ -42,9 +42,7 @@ public class Subscription {
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
 
     public void setSubject(Subject subject) {
         this.subject = subject;

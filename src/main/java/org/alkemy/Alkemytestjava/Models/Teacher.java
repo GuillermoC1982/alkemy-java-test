@@ -21,7 +21,7 @@ public class Teacher {
     private int dni;
     private boolean active;
 
-    @OneToMany(mappedBy="teacher", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="teacher", fetch=FetchType.EAGER)
     private List<Subject> subjects;
 
     public Teacher() {

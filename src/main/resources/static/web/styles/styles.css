@@ -8,27 +8,17 @@
     height: 20rem;
 }
 
-.carousel {
-    max-height: 22rem;
-}
-.carousel-item
-{
+#Categories1{
+    height: 20rem;
 }
 
-/*
-.carousel-item.i3
-{
-    bottom: 30px;
-    position: relative;
+#Categories2{
+    height: 20rem;
 }
-.carousel-item.i2
-{
-    bottom: 30px;
-    position: relative;
+
+.carousel {
+    max-height: 25rem;
 }
-.carousel-item.i1
-{
-    bottom: 30px;
-    position: relative;
-}
-*/
+
+
+

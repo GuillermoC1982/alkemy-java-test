@@ -1,13 +1,12 @@
 package org.alkemy.Alkemytestjava.Controllers;
 
-import org.alkemy.Alkemytestjava.DTO.DtoMaker;
+import org.alkemy.Alkemytestjava.Dto.DtoMaker;
 import org.alkemy.Alkemytestjava.Models.*;
 import org.alkemy.Alkemytestjava.Repositories.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -27,11 +26,8 @@ public class AlkemyController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @RequestMapping("/getInfo")
-    public Map<String, Object> getGames(Authentication authentication) {
+    public Map<String, Object> getInfo(Authentication authentication) {
 
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
 
@@ -40,25 +36,27 @@ public class AlkemyController {
             user = userRepository.findByDni(authentication.getName());
 
         dto.put("user", DtoMaker.GetFromEntity(user));
-
         dto.put("teachers", teachersRepository
                 .findAll()
                 .stream()
-                .map(DtoMaker::GetFromEntity)
                 .collect(toList()));
 
         dto.put("subjects", subjectsRepository
                 .findAll()
                 .stream()
-                .map(item -> DtoMaker.GetFromEntity(item))
                 .collect(toList()));
 
         return dto;
-
     }
 
-    private boolean isUserAuthenticated(Authentication authentication) {
+    public static boolean isUserAuthenticated(Authentication authentication) {
         return authentication != null && (authentication instanceof AnonymousAuthenticationToken == false);
+    }
+
+    public static Map<String, Object> makeMap(String key, Object value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, value);
+        return map;
     }
 
 }

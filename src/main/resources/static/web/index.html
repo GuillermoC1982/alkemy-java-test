@@ -22,15 +22,15 @@
                     <a class="nav-link" href="#" data-toggle="modal" data-target="#teacherModal">Teachers <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#subjetModal">Subjects</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#subjectModal">Subjects</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="modal" data-target="#subscriptionsModal">Subscriptions</a>
                 </li>
-                <li v-show="user == null" class="nav-item" data-toggle="modal" data-target="#loginModal">
+                <li v-if="user == null" class="nav-item" data-toggle="modal" data-target="#loginModal">
                     <a class="nav-link" href="#">Login</a>
                 </li>
-                <li v-show="user != null" class="nav-item" v-on:click="logout">
+                <li v-else class="nav-item" v-on:click="logout">
                     <a class="nav-link" href="#">Logout</a>
                 </li>
             </ul>
@@ -45,13 +45,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item i1 active">
-                    <img class="d-block w-100" src="img/10-Undergraduate-AI-Data-Science-Courses-One-Can-Choose-After-12th-Grade-min.jpg" id="CategoriesC"  alt="First slide">
+                    <img class="d-block w-100" src="img/10-Undergraduate-AI-Data-Science-Courses-One-Can-Choose-After-12th-Grade-min.jpg"  alt="First slide">
                 </div>
                 <div class="carousel-item i2">
-                    <img class="d-block w-100" src="img/1280x800-1280x800-dsc08570.e8a.532.jpg" id="CategoriesC" alt="Second slide">
+                    <img class="d-block w-100" src="img/1280x800-1280x800-dsc08570.e8a.532.jpg"  alt="Second slide">
                 </div>
                 <div class="carousel-item i3">
-                    <img class="d-block w-100" src="img/67-673750_students-wallpapers-c347o4h-campus-happy-college-students.jpg" id="CategoriesC" alt="Third slide">
+                    <img class="d-block w-100" src="img/67-673750_students-wallpapers-c347o4h-campus-happy-college-students.jpg"  alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -66,18 +66,18 @@
     </div>
     <div class="row mx-0" id="card"  >
         <div class="card-group">
-            <div class="card" data-toggle="modal" data-target="#teacherModal">
+            <div class="card" v-on:click="openModal('teacherModal');">
                 <img class="card-img-top" id="Categories" src="img/25072988-profesor-de-escritura-de-matemáticas-de-la-escuela-secundaria-y-la-fórmula-de-la-ciencia.jpg" alt="Teachers">
                 <div class="card-body">
-                    <h5 class="card-title" data-toggle="modal" data-target="#teacherModal">Teachers</h5>
+                    <h5 class="card-title">Teachers</h5>
                     <p class="card-text">Proud of our great Teachers.</p>
                 </div>
                 <div class="card-footer" v-if="teachers != null && teachers.length > 0">
                     <small class="text-muted">Meet our {{teachers.length}} teachers</small>
                 </div>
             </div>
-            <div class="card" data-toggle="modal" data-target="#subjetModal">
-                <img class="card-img-top"id="Categories" src="img/60811893-university-students-standing-near-concrete-wall-with-school-icons-on-it-holding-different-objects-co.jpg" alt="Subjects">
+            <div class="card" v-on:click="openModal('subjectModal');">
+                <img class="card-img-top" id="Categories1" src="img/60811893-university-students-standing-near-concrete-wall-with-school-icons-on-it-holding-different-objects-co.jpg" alt="Subjects">
                 <div class="card-body">
                     <h5 class="card-title">Subjects</h5>
                     <p class="card-text">Re copadas materias interesantes.</p>
@@ -87,13 +87,13 @@
                 </div>
             </div>
             <div class="card" data-toggle="modal" data-target="#subscriptionsModal">
-                <img class="card-img-top" id="Categories" src="img/5d742610e7799.image.jpg" alt="Subscriptions">
+                <img class="card-img-top" id="Categories2" src="img/5d742610e7799.image.jpg" alt="Subscriptions">
                 <div class="card-body">
                     <h5 class="card-title">Your Suscriptions</h5>
                     <p class="card-text">Aqui vas a ver las subscripciones a materias que tenes</p>
                 </div>
-                <div class="card-footer" v-if="user != null && user.subscriptions.length > 0">
-                    <small class="text-muted">See our {{user.subscriptions.length}} subscriptions</small>
+                <div class="card-footer" v-if="user != null && user.subscriptions != null && user.subscriptions.length > 0">
+                    <small class="text-muted" >See our {{user.subscriptions.length}} subscriptions</small>
                 </div>
             </div>
         </div>
@@ -126,25 +126,31 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="teacherModal" tabindex="-1" role="dialog" aria-labelledby="teacherM" aria-hidden="true">
+
+
+
+
+
+
+    <div class="modal fade" id="teacherModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content mcList">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="teacherM">Our Teachers</h5>
+                    <h5 class="modal-title">Our Teachers</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body ">
-                    <p>Meet our {{teachers.length}} teachers</p>
-                    <button type="button" class="btn btn-info" v-if="user && user.role == 'student'" v-on:click="openTeacherControlModal(null)">+ New Teacher</button>
+                    <p class="float-left mb-2">Meet our {{teachers.length}} teachers</p>
+                    <button type="button" class="btn btn-info float-right mb-2" v-if="user && user.role == 'admin'" v-on:click="showForm('teacherModal')">+ New Teacher</button>
                     <table border="1" class="table" >
                         <thead>
                         <tr>
                             <td><b>Name</b></td>
                             <td><b>Last Name</b></td>
                             <td><b>DNI</b></td>
-                            <td v-if="user && user.role == 'student'"><b>Actions</b></td>
+                            <td v-if="user && user.role == 'admin'"><b>Actions</b></td>
                         </tr>
                         </thead>
                         <tbody>
@@ -152,8 +158,8 @@
                             <td>{{teacher.name}}</td>
                             <td>{{teacher.last_name}}</td>
                             <td>{{teacher.dni}}</td>
-                            <td v-if="user && user.role == 'student'">
-                                <button type="button" class="btn btn-info" v-on:click="openTeacherControlModal(teacher)">Edit</button>
+                            <td v-if="user && user.role == 'admin'">
+                                <button type="button" class="btn btn-info" v-on:click="showForm('teacherModal', teacher)">Edit</button>
                                 <button type="button" class="btn btn-danger" v-on:click="deleteTeacher(teacher)">Delete</button>
                             </td>
                         </tr>
@@ -162,16 +168,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="modal fade" id="teacherControlModal" tabindex="-1" role="dialog" aria-labelledby="teacherCtrlM" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content mcForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="teacherCtrlM"></h5>
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -201,38 +205,62 @@
                     <input type="hidden" required id="hidIdTeacher" value="0">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" v-on:click="hideForm('teacherModal')">Close</button>
+                    <button type="button" class="btn btn-primary" v-on:click="submitTeacher()">Save changes</button>
                 </div>
-            </div>
+        </div>
         </div>
     </div>
-    <div class="modal fade" id="subjetModal" tabindex="-1" role="dialog" aria-labelledby="subjetM" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+
+
+
+
+
+
+
+    <div class="modal fade" id="subjectModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content mcList">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="subjetM">Subjets</h5>
+                    <h5 class="modal-title">Our Subjets</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body ">
-                    <p>These are our subjects and their availability</p>
-                    <table border="1" class="table" >
+                    <p class="float-left mb-2">Our {{teachers.length}} subjects availability</p>
+                    <button type="button" class="btn btn-info float-right mb-2" v-if="user && user.role == 'admin'" v-on:click="showForm('subjectModal', null)">+ New Subject</button>
+
+                    <table border="1" class="table w-100" >
                         <thead>
                         <tr>
                             <td><b>Name</b></td>
                             <td><b>Teacher</b></td>
                             <td><b>Time</b></td>
                             <td><b>Availability</b></td>
+                            <td v-if="user"><b>Actions</b></td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="subject in subjects">
                             <td>{{subject.name}}</td>
-                            <td>{{subject.teacher.name}} {{subject.teacher.last_name}}</td>
+                            <td v-if="subject.teacher">{{subject.teacher.name}} {{subject.teacher.last_name}}</td>
+                            <td v-else> - Not Yet Assigned - </td>
                             <td>{{subject.time}}</td>
                             <td>{{subject.availability}}</td>
+                            <td v-if="user && user.role == 'admin'">
+                                <button type="button" class="btn btn-info" v-on:click="showForm('subjectModal', subject)">Edit</button>
+                                <button type="button" class="btn btn-danger" v-on:click="deleteSubject(subject)">Delete</button>
+                            </td>
+                            <td v-else-if="user && user.role == 'student'">
+                                <div v-if="user.subscriptions.find(s => s.subject.id == subject.id)">
+                                    <button type="button" class="btn btn-warning" v-on:click="subscribe(subject.id, false)">Unsubscribe</button>
+                                </div>
+                                <div v-else>
+                                    <button type="button" class="btn btn-info" v-on:click="subscribe(subject.id, true)">Subscribe</button>
+                                </div>
+                            </td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -242,8 +270,64 @@
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
+            <div class="modal-content mcForm">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col col-sm-12 col-md-6">
+                            Name
+                        </div>
+                        <div class="col col-sm-12 col-md-6">
+                            <input type="text" required id="txtSubjectName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-12 col-md-6">
+                            Teacher
+                        </div>
+                        <div class="col col-sm-12 col-md-6">
+                            <select required id="selIdTeacher">
+                                <option v-for="teacher in teachers" v-bind:value="teacher.id">
+                                    {{ teacher.name + ' ' + teacher.last_name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-12 col-md-6">
+                            Time
+                        </div>
+                        <div class="col col-sm-12 col-md-6">
+                            <input type="text" required id="txtSubjectTime">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-12 col-md-6">
+                            Availability
+                        </div>
+                        <div class="col col-sm-12 col-md-6">
+                            <input type="text" required id="txtSubjectAvailability">
+                        </div>
+                    </div>
+                    <input type="hidden" required id="hidIdSubject" value="0">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" v-on:click="hideForm('subjectModal')">Close</button>
+                    <button type="button" class="btn btn-primary" v-on:click="submitSubject()">Save changes</button>
+                </div>
+            </div>
+
         </div>
     </div>
+
+
+
+
 
     <div class="modal fade" id="subscriptionsModal" tabindex="-1" role="dialog" aria-labelledby="subscM" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -262,7 +346,6 @@
                             <td><b>Subject</b></td>
                             <td><b>Teacher</b></td>
                             <td><b>Time</b></td>
-
                         </tr>
                         </thead>
                         <tbody>

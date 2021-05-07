@@ -1,14 +1,12 @@
 package org.alkemy.Alkemytestjava.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
-
-import static java.util.stream.Collectors.toList;
 
 @Entity
 public class User {
@@ -19,7 +17,10 @@ public class User {
     private long id;
 
     private String dni;
+
+    @JsonProperty
     private String file;
+
     private String role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -42,6 +43,7 @@ public class User {
         return dni;
     }
 
+    @JsonIgnore
     public String getFile() {
         return file;
     }
@@ -54,6 +56,7 @@ public class User {
         this.dni = dni;
     }
 
+    @JsonIgnore
     public void setFile(String file) {
         this.file = file;
     }

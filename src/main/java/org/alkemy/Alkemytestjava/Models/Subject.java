@@ -26,7 +26,7 @@ public class Subject {
     @JoinColumn(name="teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy="subject", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="subject", fetch=FetchType.EAGER)
     private List<Subscription> subscriptions;
 
     public Subject() {
@@ -44,10 +44,13 @@ public class Subject {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
-
 
     public Teacher getTeacher() {
         return teacher;

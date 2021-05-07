@@ -49,11 +49,12 @@ public class AlkemyTestJavaApplication {
 
 			//User parameters constructor:(int dni, Integer file, String role)
 
-			User user1 = userRepository.save(new User("28313880", passwordEncoder.encode ("123"), "student"));
+			User user1 = userRepository.save(new User("666", passwordEncoder.encode ("666"), "student"));
 			User user2 = userRepository.save(new User("24545766", passwordEncoder.encode ("221"), "student"));
+			User user3 = userRepository.save(new User("28313880", passwordEncoder.encode ("123"), "admin"));
 
-			Subscription sus1 = subscriptionRepository.save(new Subscription(subject1, user1));
-			Subscription sus2 = subscriptionRepository.save(new Subscription(subject2, user1));
+			Subscription sus1 = subscriptionRepository.save(new Subscription(subject2, user1));
+			Subscription sus2 = subscriptionRepository.save(new Subscription(subject1, user1));
 		};
 	}
 }

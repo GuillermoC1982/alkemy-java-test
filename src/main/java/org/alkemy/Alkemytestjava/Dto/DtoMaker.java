@@ -1,4 +1,4 @@
-package org.alkemy.Alkemytestjava.DTO;
+package org.alkemy.Alkemytestjava.Dto;
 
 import org.alkemy.Alkemytestjava.Models.*;
 
@@ -29,23 +29,7 @@ public class DtoMaker {
             else if (oEntity instanceof Subscription) {
                 Subscription oSubscription = (Subscription)oEntity;
                 dto.put("id", oSubscription.getId());
-                dto.put("subject", DtoMaker.GetFromEntity(oSubscription.getSubject()));
-            }
-            else if (oEntity instanceof Subject) {
-                Subject oSubject = (Subject)oEntity;
-                dto.put("id", oSubject.getId());
-                dto.put("name", oSubject.getName());
-                dto.put("time", oSubject.getTime());
-                dto.put("availability", oSubject.getAvailability());
-                dto.put("teacher", DtoMaker.GetFromEntity(oSubject.getTeacher()));
-            }
-            else if (oEntity instanceof Teacher) {
-                Teacher oTeacher = (Teacher)oEntity;
-                dto.put("id", oTeacher.getId());
-                dto.put("name", oTeacher.getName());
-                dto.put("last_name", oTeacher.getLast_name());
-                dto.put("dni", oTeacher.getDni());
-                dto.put("active", oTeacher.isActive());
+                dto.put("subject", oSubscription.getSubject());
             }
         }
         return dto;
